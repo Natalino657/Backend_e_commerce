@@ -92,7 +92,8 @@ const products = [
   {
     name: "iPad Pro M4",
     image:
-      "https://smartbuy-me.com/cdn/shop/files/ABJ1503ST0323_659a9533-1221-4948-bb4b-9615e87d7104.jpg?v=1727851168&width=1200",
+      "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/ipad-pro-11-inch-13-inch.png",
+
     description:
       "The iPad Pro with the M4 chip offers groundbreaking performance and a stunning Liquid Retina XDR display. Ideal for professional workflows, artistic endeavors, and immersive entertainment.",
     category: "tablets",
