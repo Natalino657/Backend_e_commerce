@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import errorHandler from "./middleware/errorHandler.js";
 
 import cookieParser from "cookie-parser";
 import cors from "cookie-parser";
@@ -21,6 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

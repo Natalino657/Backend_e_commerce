@@ -10,7 +10,7 @@ const authUser = asynchandler(async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  if (User && (await user.matchPassword(password))) {
+  if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
 
     res.json({
@@ -74,13 +74,12 @@ const getUserProfile = asynchandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    (res,
-      json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-      }));
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
   } else {
     res.status(404);
     throw new Error("User not found");
@@ -88,7 +87,7 @@ const getUserProfile = asynchandler(async (req, res) => {
 });
 
 const updateUserProfile = asynchandler(async (req, res) => {
-  const user = await User.finfById(req.user._id);
+  const user = await User.findById(req.user._id);
 
   if (user) {
     if (req.body.email && !validator.isEmail(req.body.email)) {
@@ -147,7 +146,7 @@ const deleteUser = asynchandler(async (req, res) => {
       throw new Error("Can not delete admin user");
     }
 
-    await deleteone({ _id: user._id });
+    await deleteOne({ _id: user._id });
     res.json({ message: "User removed sucessfully" });
   } else {
     res.status(404);
