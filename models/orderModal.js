@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const oderSchema = mongoose.Schema(
+const orderSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -119,3 +119,7 @@ const oderSchema = mongoose.Schema(
   },
   { timestamp: true },
 );
+
+const Order = mongoose.model("Order", orderSchema);
+
+export default Order;
