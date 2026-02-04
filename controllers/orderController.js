@@ -28,7 +28,17 @@ const addOrderItem = asyncHandler(async (req, res) => {
     };
   });
 
-  const createdOrder = await Order.save();
+  const price = calcPrice(dbOrderItems);
+
+  const order = new Order({
+    orderItem: dbOrderItems,
+    user: req.user._id,
+    shippingAddress,
+    paymantMethod,
+    ...price,
+  });
+
+  const createdOrder = await order.save();
   res.status(201).json(createdOrder);
 });
 
