@@ -110,7 +110,7 @@ const orderSchema = mongoose.Schema(
     isDelivered: {
       type: Boolean,
       require: true,
-      default: flase,
+      default: false,
     },
 
     deliveredAt: {

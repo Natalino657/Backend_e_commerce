@@ -1,7 +1,7 @@
-import asyncHandler from "../middleware/asyncHandler";
-import Order from "../models/orderModal";
-import Product from "../models/productModel";
-import { calcPrice } from "../utils/calcPrice";
+import asyncHandler from "../middleware/asyncHandler.js";
+import Order from "../models/orderModal.js";
+import Product from "../models/productModel.js";
+import { calcPrice } from "../utils/calcPrice.js";
 
 //private user access
 

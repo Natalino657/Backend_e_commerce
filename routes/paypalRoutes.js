@@ -1,10 +1,10 @@
 import express from "express";
 
-import paypalClient from "../utils/paypalClient";
+import paypalClient from "../utils/paypalClient.js";
 import paypal from "@paypal/checkout-server-sdk";
 
 import dotenv from "dotenv";
-import client from "../utils/paypalClient";
+import client from "../utils/paypalClient.js";
 
 const router = express.Router();
 
