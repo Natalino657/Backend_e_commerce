@@ -56,17 +56,17 @@ router.post("create-order", async (req, res) => {
 
 router.post("/capture-order", async (req, res) => {
   try {
-    const { orderID } = req.body;
+    const { orderId } = req.body;
 
-    if (!orderID) {
+    if (!orderId) {
       res.status(400).json({
         error: "No id order provided",
       });
     }
 
-    const getOrderRequest = new paypal.orders.OrdersGetRequest(orderID);
+    const getOrderRequest = new paypal.orders.OrdersGetRequest(orderId);
     const orderDetails = await paypalClient.execute(getOrderRequest);
-    const request = new paypal.orders.OrdersCaptureRequest(orderID);
+    const request = new paypal.orders.OrdersCaptureRequest(orderId);
 
     request.requestBody({});
 
