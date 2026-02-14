@@ -14,7 +14,7 @@ router.get("/config", (req, res) => {
   });
 });
 
-router.post("create-order", async (req, res) => {
+router.post("/create-order", async (req, res) => {
   try {
     const { amount } = req.body;
 
@@ -24,7 +24,7 @@ router.post("create-order", async (req, res) => {
       });
     }
 
-    const request = new paypal.orders.OrdersCaptureRequest();
+    const request = new paypal.orders.OrdersCreateRequest();
 
     request.prefer("return=representation");
 
@@ -33,7 +33,7 @@ router.post("create-order", async (req, res) => {
       purchase_units: [
         {
           amount: {
-            currency_code: "EUR",
+            currency_code: "USD",
             value: amount.toString(),
           },
         },
@@ -92,7 +92,7 @@ router.post("/capture-order", async (req, res) => {
 
     if (
       response.result.purchase_units &&
-      response.result.purchase_units.lenght > 0
+      response.result.purchase_units.length > 0
     ) {
       captureData.purchase_units = response.result.purchase_units.map(
         (unit) => ({

@@ -4,9 +4,8 @@ import Product from "../models/productModel.js";
 import { calcPrice } from "../utils/calcPrice.js";
 
 //private user access
-
 const addOrderItem = asyncHandler(async (req, res) => {
-  const { orderItems, shippingAddress, paymantMethod } = req.body;
+  const { orderItems, shippingAddress, paymentMethod } = req.body;
 
   //if(!orderItems || orderitems.length === 0)
   if (!orderItems?.length) {
@@ -31,10 +30,10 @@ const addOrderItem = asyncHandler(async (req, res) => {
   const price = calcPrice(dbOrderItems);
 
   const order = new Order({
-    orderItem: dbOrderItems,
+    orderItems: dbOrderItems,
     user: req.user._id,
     shippingAddress,
-    paymantMethod,
+    paymentMethod,
     ...price,
   });
 
@@ -61,7 +60,6 @@ const getOrderById = asyncHandler(async (req, res) => {
 });
 
 //admin access only
-
 const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (!order) {
