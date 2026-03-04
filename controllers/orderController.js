@@ -69,7 +69,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 
   order.isPaid = true;
   order.paidAt = Date.now();
-  order.paymantResult = {
+  order.paymentResult = {
     id: req.body.paymantId || req.body.id,
     status: "COMPLETED",
     update_time: req.body.update_time || new Date().toISOString(),
@@ -85,6 +85,9 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     product.countInStock -= item.qty;
     await product.save();
   }
+
+  const updatedOrder = await order.save();
+  res.status(200).json(updatedOrder);
 });
 
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
