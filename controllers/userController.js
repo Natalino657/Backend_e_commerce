@@ -38,7 +38,7 @@ const registerUser = asynchandler(async (req, res) => {
   ) {
     res.status(400);
     throw new Error(
-      '"Min 8 chars for password, upper, lower, number and symbol"'
+      '"Min 8 chars for password, upper, lower, number and symbol"',
     );
   }
 
@@ -66,7 +66,7 @@ const registerUser = asynchandler(async (req, res) => {
 });
 
 const logoutUser = asynchandler(async (req, res) => {
-  res.cookie("jwt");
+  res.clearCookie("jwt");
   res.status(200).json({ message: "User logged out" });
 });
 
@@ -107,7 +107,7 @@ const updateUserProfile = asynchandler(async (req, res) => {
     ) {
       res.status(400);
       throw new Error(
-        "Min 8 chars for password, upper, lower, number and symbol"
+        "Min 8 chars for password, upper, lower, number and symbol",
       );
     }
 
