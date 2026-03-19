@@ -7,6 +7,8 @@ import cookieParser from "cookie-parser";
 import errorHandler from "./middleware/errorHandler.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import paypalRoutes from "./routes/paypalRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
+import path from "path";
 
 import cors from "cookie-parser";
 dotenv.config();
@@ -21,10 +23,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+const updloadsDir = path.join(process.cwd(), "..", "uploads");
+app.use("/uploads", express.static(updloadsDir));
+
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/paypal", paypalRoutes);
+app.use("/api/upload", uploadRoutes);
 
 app.get("/api/config/paypal", (req, res) => {
   const clientId = process.env.PAYPAL_CLIENT_ID;
