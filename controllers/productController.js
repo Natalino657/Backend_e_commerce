@@ -41,7 +41,7 @@ const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     name: "Sample name",
     user: req.user._id,
-    image: "/images/sample.jpg",
+    image: "/uploads/sample.png",
     category: "Sample category",
     countInStock: 0,
     numReviewa: 0,
@@ -78,7 +78,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    await Product.deleteone({ _id: req.params.id });
+    await Product.deleteOne({ _id: req.params.id });
     res.json({ message: "Product successfully deleted" });
   } else {
     res.status(404);
@@ -92,7 +92,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 
   if (product) {
     const alreadyReviewed = product.reviews.find(
-      (r) => r.user.toString() === req.user._id.toString()
+      (r) => r.user.toString() === req.user._id.toString(),
     );
 
     if (alreadyReviewed) {
